@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAXIM | Web Developer & Web Designer - Servicii Web & Marketing</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #0a0a0c;
+            --bg-card: #121318;
+            --bg-card-hover: #181a22;
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-glow: rgba(212, 175, 55, 0.4);
+            --silver-primary: #c0c0c0;
+            --silver-light: #f5f5f5;
+            --silver-glow: rgba(192, 192, 192, 0.25);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --red-discount: #ef4444;
+            --neon-border: rgba(212, 175, 55, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Custom Neon Glow Cursor Light */
+        #neon-cursor {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(192, 192, 192, 0.05) 40%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: transform 0.08s linear;
+        }
+
+        /* 1. INTRO PRELOADER ANIMATION - CENTRAT PERFECT */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050507;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--gold-primary);
+            border-bottom-color: var(--silver-primary);
+            animation: spin 1.8s infinite linear;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .logo-monogram {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--silver-light) 0%, var(--silver-primary) 45%, var(--gold-primary) 55%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            animation: pulseLogo 2s infinite ease-in-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .preloader-text {
+            position: absolute;
+            top: calc(50% + 100px);
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes pulseLogo {
+            0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.98); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.04); }
+        }
+
+        /* NAVBAR */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.2rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid var(--gold-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: var(--gold-primary);
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .brand-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .brand-sub {
+            display: block;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.65rem;
+            color: var(--gold-primary);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--gold-primary);
+            text-shadow: 0 0 8px var(--gold-glow);
+        }
+
+        .btn-header {
+            background: linear-gradient(135deg, var(--gold-primary), #b38f2a);
+            color: #000;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            box-shadow: 0 0 15px var(--gold-glow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 180px 8% 100px;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, rgba(10, 10, 12, 1) 70%);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            border-radius: 30px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.2rem;
+            line-height: 1.25;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero h1 span.gold {
+            background: linear-gradient(135deg, #fff 0%, var(--gold-primary) 50%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span.silver {
+            background: linear-gradient(135deg, #fff 0%, var(--silver-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, #b89228 100%);
+            color: #0a0a0c;
+            padding: 0.95rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 20px var(--gold-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.8);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            border: 1px solid var(--neon-border);
+            padding: 0.95rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--silver-primary);
+            box-shadow: 0 0 20px var(--silver-glow);
+            color: #fff;
+        }
+
+        /* SECTIONS COMMON */
+        section {
+            padding: 90px 8%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-subtitle {
+            color: var(--gold-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.3rem;
+            color: var(--text-main);
+        }
+
+        /* PORTFOLIO PROJECTS */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--neon-border);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 30px -10px var(--gold-glow), 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .project-header-bar {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .browser-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .project-domain {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--gold-light);
+            text-decoration: none;
+        }
+
+        .project-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-tag {
+            align-self: flex-start;
+            background: rgba(192, 192, 192, 0.1);
+            color: var(--silver-light);
+            border: 1px solid rgba(192, 192, 192, 0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-box {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .price-old {
+            color: var(--red-discount);
+            text-decoration: line-through;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .price-new {
+            color: var(--gold-primary);
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .price-badge {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--red-discount);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .maintenance-note {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--silver-light);
+            font-size: 0.85rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-top: 8px;
+            margin-top: 6px;
+        }
+
+        .maintenance-note i {
+            color: var(--gold-primary);
+        }
+
+        .project-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-project {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-live {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-live:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .btn-order {
+            background: #25d366;
+            color: #000;
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-order:hover {
+            background: #20bd5a;
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* SERVICES & ADS SECTION */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--neon-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gold-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--silver-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .service-price span {
+            color: var(--gold-primary);
+            font-size: 1.3rem;
+        }
+
+        /* BONUS CARD HIGHLIGHT */
+        .bonus-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(18, 19, 24, 0.95) 100%);
+            border: 2px solid var(--gold-primary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+            flex-wrap: wrap;
+        }
+
+        .bonus-content {
+            max-width: 650px;
+        }
+
+        .bonus-badge {
+            background: var(--gold-primary);
+            color: #000;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .bonus-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .bonus-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* REVIEWS SECTION */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .reviews-container { grid-template-columns: 1fr; }
+        }
+
+        .review-form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--neon-border);
+            padding: 2.5rem;
+            border-radius: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 10px;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .star-rating i.active {
+            color: var(--gold-primary);
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .reviews-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .reviews-list::-webkit-scrollbar-thumb {
+            background: var(--gold-primary);
+            border-radius: 10px;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .reviewer-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--silver-light);
+        }
+
+        .reviewer-site {
+            font-size: 0.8rem;
+            color: var(--gold-primary);
+        }
+
+        .review-stars {
+            color: var(--gold-primary);
+            font-size: 0.85rem;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #050507;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 50px 8% 30px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--gold-primary);
+        }
+
+        .copy-text {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            nav { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            section { padding: 60px 5%; }
+            .bonus-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NEON MOUSE GLOW -->
+    <div id="neon-cursor"></div>
+
+    <!-- 1. INTRO PRELOADER ANIMATION PERFECT CENTRAT -->
+    <div id="preloader">
+        <div class="preloader-circle"></div>
+        <div class="logo-monogram">MX</div>
+        <div class="preloader-text">MAXIM • WEBDEVELOPER</div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header>
+        <a href="#" class="brand-logo">
+            <div class="brand-icon">MX</div>
+            <div>
+                <span class="brand-title">MAXIM</span>
+                <span class="brand-sub">Webdeveloper & Designer</span>
+            </div>
+        </a>
+        <nav>
+            <a href="#portofoliu">Portofoliu</a>
+            <a href="#servicii">Servicii & Marketing</a>
+            <a href="#recenzii">Recenzii</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <a href="https://wa.me/37360126912?text=Salut%20Maxim,%20am%20v%C4%83zut%20oferta%20ta%20pe%20site%20%C8%99i%20a%C8%99%20dori%20o%20consulta%C8%9Bie!" class="btn-header" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Direct
+        </a>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-badge">
+            <i class="fa-solid fa-crown" style="color: var(--gold-primary);"></i>
+            Creație Web & Strategii Digital Marketing
+        </div>
+        <h1>
+            Dezvoltare Web de <span class="gold">Înaltă Performanță</span> & <span class="silver">Soluții Premium</span>
+        </h1>
+        <p>
+            Creez site-uri de prezentare, magazine online e-commerce și campanii de promovare orientate pe rezultate reale și creșterea vânzărilor afacerii tale.
+        </p>
+        <div class="hero-cta">
+            <a href="#portofoliu" class="btn-primary">
+                <i class="fa-solid fa-fire"></i> Vezi Ofertele Limitate
+            </a>
+            <a href="https://wa.me/37360126912?text=Salut!%20Vreau%20s%C4%83%20solicit%20un%20proiect%20web." class="btn-secondary" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Discută pe WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portofoliu">
+        <div class="section-header">
+            <span class="section-subtitle">Portofoliu & Oferte Limitate</span>
+            <h2 class="section-title">Proiecte Web Realizate</h2>
+        </div>
+
+        <div class="portfolio-grid">
+            
+            <!-- PROIECT 1: ITA GROUP -->
+            <div class="project-card">
+                <div class="project-header-bar">
+                    <div class="browser-dots">
+                        <span class="browser-dot dot-red"></span>
+                        <span class="browser-dot dot-yellow"></span>
+                        <span class="browser-dot dot-green"></span>
+                    </div>
+                    <a href="http://www.itagroup.md" target="_blank" class="project-domain">www.itagroup.md</a>
+                </div>
+                <div class="project-body">
+                    <span class="project-tag">Site Corporativ / Portofoliu</span>
+                    <h3 class="project-title">ITA Group</h3>
+                    <p class="project-desc">
+                        Platformă web de prezentare servicii corporative, structurată pe arhitectură modernă, ultra-rapidă și optimizată pentru conversia vizitatorilor.
+                    </p>
+
+                    <div class="price-box">
+                        <div class="price-row">
+                            <span class="price-old">400€</span>
+                            <span class="price-new">300€</span>
+                            <span class="price-badge">-25% REDUCERE</span>
+                        </div>
+                        <div class="maintenance-note">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            Mentenanță & Administrare Tehnică: <strong>500 MDL / lună</strong>
+                        </div>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="http://www.itagroup.md" target="_blank" class="btn-project btn-live">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Vezi Live
+                        </a>
+                        <a href="https://wa.me/37360126912?text=Salut%20Maxim!%20Vreau%20un%20site%20de%20prezentare%20similar%20cu%20www.itagroup.md%20la%20ofert%C4%83%20de%20300€." class="btn-project btn-order" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i> Comandă
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROIECT 2: BUMBONEL -->
+            <div class="project-card">
+                <div class="project-header-bar">
+                    <div class="browser-dots">
+                        <span class="browser-dot dot-red"></span>
+                        <span class="browser-dot dot-yellow"></span>
+                        <span class="browser-dot dot-green"></span>
+                    </div>
+                    <a href="http://www.Bumbonel.md" target="_blank" class="project-domain">www.Bumbonel.md</a>
+                </div>
+                <div class="project-body">
+                    <span class="project-tag">Magazin Online E-Commerce</span>
+                    <h3 class="project-title">Bumbonel.md</h3>
+                    <p class="project-desc">
+                        Platformă completă de comerț electronic cu coș de cumpărături, gestiune produse, plată online, filtre avansate și integrare livrare.
+                    </p>
+
+                    <div class="price-box">
+                        <div class="price-row">
+                            <span class="price-old">2000€</span>
+                            <span class="price-new">1299€</span>
+                            <span class="price-badge">OFERTĂ PREMIUM</span>
+                        </div>
+                        <div class="maintenance-note">
+                            <i class="fa-solid fa-bolt"></i>
+                            Inclus: Configurare Produse & Sistem Plăți
+                        </div>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="http://www.Bumbonel.md" target="_blank" class="btn-project btn-live">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Vezi Live
+                        </a>
+                        <a href="https://wa.me/37360126912?text=Salut%20Maxim!%20Doresc%20un%20Magazin%20Online%20E-Commerce%20stil%20Bumbonel.md%20la%20pretul%20reducere%201299€." class="btn-project btn-order" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i> Comandă
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROIECT 3: BERERACI -->
+            <div class="project-card">
+                <div class="project-header-bar">
+                    <div class="browser-dots">
+                        <span class="browser-dot dot-red"></span>
+                        <span class="browser-dot dot-yellow"></span>
+                        <span class="browser-dot dot-green"></span>
+                    </div>
+                    <a href="http://www.bereraci.md" target="_blank" class="project-domain">www.bereraci.md</a>
+                </div>
+                <div class="project-body">
+                    <span class="project-tag">Catalog Gastronomic & Produse</span>
+                    <h3 class="project-title">Bereraci</h3>
+                    <p class="project-desc">
+                        Pagină web modernă destinată berăriilor craft și produselor gastronomice, cu meniu interactiv, imagini HD și apel rapid la comandă.
+                    </p>
+
+                    <div class="price-box">
+                        <div class="price-row">
+                            <span class="price-old">400€</span>
+                            <span class="price-new">300€</span>
+                            <span class="price-badge">-25% REDUCERE</span>
+                        </div>
+                        <div class="maintenance-note">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                            Optimizat 100% pentru mobil & Meniu Digital
+                        </div>
+                    </div>
+
+                    <div class="project-actions">
+                        <a href="http://www.bereraci.md" target="_blank" class="btn-project btn-live">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Vezi Live
+                        </a>
+                        <a href="https://wa.me/37360126912?text=Salut%20Maxim!%20Doresc%20o%20pagin%C4%83%20web%20catalog%20stil%20www.bereraci.md%20la%20pretul%20de%20300€." class="btn-project btn-order" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i> Comandă
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SERVICES & MARKETING SECTION -->
+    <section id="servicii" style="background: rgba(18, 19, 24, 0.5);">
+        <div class="section-header">
+            <span class="section-subtitle">Promovare Digitală & Creștere</span>
+            <h2 class="section-title">Servicii Marketing & SEO</h2>
+        </div>
+
+        <div class="services-grid">
+            
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-brands fa-google"></i></div>
+                <h3 class="service-title">Google Ads</h3>
+                <p class="service-desc">Campanii de Search & Display optimizate pentru a plasa afacerea ta pe prima poziție în căutările clienților calificați.</p>
+                <div class="service-price">Tarif minim: <span>de la 50€</span></div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-brands fa-tiktok"></i></div>
+                <h3 class="service-title">TikTok Ads</h3>
+                <p class="service-desc">Strategii de reclame video dinamice pe TikTok pentru un număr maxim de vizionări și conversii rapide.</p>
+                <div class="service-price">Tarif minim: <span>de la 50€</span></div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-brands fa-facebook-f"></i></div>
+                <h3 class="service-title">Facebook & Instagram Ads</h3>
+                <p class="service-desc">Targetare precisă a publicului țintă pe rețelele Meta cu retargeting inteligent pentru atragere de clienți noi.</p>
+                <div class="service-price">Tarif minim: <span>de la 50€</span></div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3 class="service-title">SEO & Optimizare Viteză</h3>
+                <p class="service-desc">Optimizare cod, viteza de încărcare și structură pentru poziționare organică superioară în Google.</p>
+                <div class="service-price">Tarif minim: <span>de la 80€</span></div>
+            </div>
+
+            <!-- BONUS CARD -->
+            <div class="bonus-card">
+                <div class="bonus-content">
+                    <span class="bonus-badge"><i class="fa-solid fa-gift"></i> BONUS GRATUIT INCLUS</span>
+                    <h3 class="bonus-title">Optimizare & Configurare Google Maps</h3>
+                    <p class="bonus-desc">
+                        La orice proiect web comandat care nu deține profil Google My Business / Google Maps, ofer gratuit crearea și optimizarea locației pe hartă pentru a fi găsit facil de clienții din zonă!
+                    </p>
+                </div>
+                <div>
+                    <a href="https://wa.me/37360126912?text=Salut%20Maxim,%20vreau%20s%C4%83%20beneficiez%20de%20oferta%20web%20%2B%20Bonusul%20Google%20Maps!" class="btn-primary" target="_blank">
+                        <i class="fa-solid fa-circle-check"></i> Solicită Oferta + Bonus
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section id="recenzii">
+        <div class="section-header">
+            <span class="section-subtitle">Încredere & Colaborări</span>
+            <h2 class="section-title">Recenzii de la Clienți</h2>
+        </div>
+
+        <div class="reviews-container">
+            
+            <!-- FORMULAR RECENZIE -->
+            <div class="review-form-card">
+                <h3 style="margin-bottom: 1.5rem; font-family: 'Cinzel', serif;">Adaugă o Recenzie</h3>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label>Numele tău / Compania</label>
+                        <input type="text" id="reviewerName" class="form-control" placeholder="Ex: Ion Popescu" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Site-ul realizat (Opțional)</label>
+                        <input type="text" id="reviewerSite" class="form-control" placeholder="Ex: www.afacerea-ta.md">
+                    </div>
+                    <div class="form-group">
+                        <label>Alege Numărul de Stele</label>
+                        <div class="star-rating" id="starRating">
+                            <i class="fa-solid fa-star active" data-rating="1"></i>
+                            <i class="fa-solid fa-star active" data-rating="2"></i>
+                            <i class="fa-solid fa-star active" data-rating="3"></i>
+                            <i class="fa-solid fa-star active" data-rating="4"></i>
+                            <i class="fa-solid fa-star active" data-rating="5"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Mesajul tău / Părerea despre colaborare</label>
+                        <textarea id="reviewText" class="form-control" rows="4" placeholder="Scrie părerea ta despre serviciile oferite..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; border: none; cursor: pointer;">
+                        <i class="fa-solid fa-paper-plane"></i> Trimite Recenzia
+                    </button>
+                </form>
+            </div>
+
+            <!-- LISTA RECENZII -->
+            <div class="reviews-list" id="reviewsList">
+                
+                <!-- PRESET REVIEW 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="reviewer-name">Echipa ITA Group</div>
+                            <div class="reviewer-site">www.itagroup.md</div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Maxim a creat un site de prezentare de o calitate excepțională. Serviciul de mentenanță lunară ne oferă liniște totală. Recomandăm cu toată încrederea!</p>
+                </div>
+
+                <!-- PRESET REVIEW 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="reviewer-name">Echipa Bumbonel</div>
+                            <div class="reviewer-site">www.bumbonel.md</div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Magazinul nostru e-commerce funcționează impecabil, iar vânzările au crescut din prima lună. Proiect livrat la timp și la preț promoțional excelent.</p>
+                </div>
+
+                <!-- PRESET REVIEW 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="reviewer-name">Management Bereraci</div>
+                            <div class="reviewer-site">www.bereraci.md</div>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Design-ul paginii noastre este extrem de atractiv, iar clienții apreciază modul rapid în care pot naviga prin catalog. Mulțumim!</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-logo">MAXIM</div>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Web Developer & Web Designer Profesionist</p>
+        
+        <div class="footer-contacts">
+            <a href="tel:+37360126912" class="footer-link">
+                <i class="fa-solid fa-phone" style="color: var(--gold-primary);"></i> +373 60 126 912
+            </a>
+            <a href="https://wa.me/37360126912" class="footer-link" target="_blank">
+                <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> WhatsApp Direct
+            </a>
+        </div>
+
+        <div class="copy-text">
+            &copy; 2026 MAXIM Webdevelopment. Toate drepturile rezervate. Găzduit gratuit pe GitHub Pages.
+        </div>
+    </footer>
+
+    <script>
+        // 1. PRELOADER TIMEOUT
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 1800);
+        });
+
+        // 2. MOUSE NEON CURSOR TRAILER
+        const cursor = document.getElementById('neon-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // 3. STAR RATING SYSTEM FOR REVIEWS
+        const stars = document.querySelectorAll('#starRating i');
+        let selectedRating = 5;
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = parseInt(star.getAttribute('data-rating'));
+                updateStars(selectedRating);
+            });
+        });
+
+        function updateStars(rating) {
+            stars.forEach(star => {
+                const starRating = parseInt(star.getAttribute('data-rating'));
+                if (starRating <= rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // 4. DYNAMIC REVIEWS MANAGEMENT (LOCAL STORAGE)
+        const reviewForm = document.getElementById('reviewForm');
+        const reviewsList = document.getElementById('reviewsList');
+
+        // Load saved reviews on launch
+        document.addEventListener('DOMContentLoaded', loadReviews);
+
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('reviewerName').value;
+            const site = document.getElementById('reviewerSite').value || 'Colaborator Client';
+            const text = document.getElementById('reviewText').value;
+
+            const newReview = {
+                name,
+                site,
+                rating: selectedRating,
+                text
+            };
+
+            saveReview(newReview);
+            renderReviewCard(newReview, true);
+            reviewForm.reset();
+            updateStars(5);
+            selectedRating = 5;
+            alert('Recenzia ta a fost adăugată cu succes! Îți mulțumim.');
+        });
+
+        function saveReview(review) {
+            let reviews = JSON.parse(localStorage.getItem('maxim_reviews') || '[]');
+            reviews.unshift(review);
+            localStorage.setItem('maxim_reviews', JSON.stringify(reviews));
+        }
+
+        function loadReviews() {
+            let reviews = JSON.parse(localStorage.getItem('maxim_reviews') || '[]');
+            reviews.forEach(review => renderReviewCard(review, false));
+        }
+
+        function renderReviewCard(review, isNew) {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<i class="fa-solid fa-star" style="color: ${i <= review.rating ? 'var(--gold-primary)' : 'rgba(255,255,255,0.1)'};"></i>`;
+            }
+
+            card.innerHTML = `
+                <div class="review-header">
+                    <div>
+                        <div class="reviewer-name">${escapeHtml(review.name)}</div>
+                        <div class="reviewer-site">${escapeHtml(review.site)}</div>
+                    </div>
+                    <div class="review-stars">${starsHtml}</div>
+                </div>
+                <p class="review-text">${escapeHtml(review.text)}</p>
+            `;
+
+            if (isNew) {
+                reviewsList.insertBefore(card, reviewsList.firstChild);
+            } else {
+                reviewsList.appendChild(card);
+            }
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/[&<>"']/g, function(m) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[m];
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1037,44 +1037,11 @@
     <section id="recenzii">
         <div class="section-header">
             <span class="section-subtitle">Încredere & Colaborări</span>
-            <h2 class="section-title">Recenzii de la Clienți</h2>
+            <h2 class="section-title">Testimoniale Publicate Manual</h2>
+            <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0; line-height: 1.7;">Recenziile sunt publicate numai după confirmarea colaborării de către titularul paginii web. Nu acceptăm recenzii anonime sau publicare automată.</p>
         </div>
 
-        <div class="reviews-container">
-            
-            <!-- FORMULAR RECENZIE -->
-            <div class="review-form-card">
-                <h3 style="margin-bottom: 1.5rem; font-family: 'Cinzel', serif;">Adaugă o Recenzie</h3>
-                <form id="reviewForm">
-                    <div class="form-group">
-                        <label>Numele tău / Compania</label>
-                        <input type="text" id="reviewerName" class="form-control" placeholder="Ex: Ion Popescu" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Site-ul realizat (Opțional)</label>
-                        <input type="text" id="reviewerSite" class="form-control" placeholder="Ex: www.afacerea-ta.md">
-                    </div>
-                    <div class="form-group">
-                        <label>Alege Numărul de Stele</label>
-                        <div class="star-rating" id="starRating">
-                            <i class="fa-solid fa-star active" data-rating="1"></i>
-                            <i class="fa-solid fa-star active" data-rating="2"></i>
-                            <i class="fa-solid fa-star active" data-rating="3"></i>
-                            <i class="fa-solid fa-star active" data-rating="4"></i>
-                            <i class="fa-solid fa-star active" data-rating="5"></i>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Mesajul tău / Părerea despre colaborare</label>
-                        <textarea id="reviewText" class="form-control" rows="4" placeholder="Scrie părerea ta despre serviciile oferite..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; border: none; cursor: pointer;">
-                        <i class="fa-solid fa-paper-plane"></i> Trimite Recenzia
-                    </button>
-                </form>
-            </div>
-
-            <!-- LISTA RECENZII -->
+        <div class="reviews-container" style="grid-template-columns: 1fr; max-width: 900px; margin: 0 auto;">
             <div class="reviews-list" id="reviewsList">
                 
                 <!-- PRESET REVIEW 1 -->
@@ -1160,105 +1127,8 @@
             cursor.style.top = e.clientY + 'px';
         });
 
-        // 3. STAR RATING SYSTEM FOR REVIEWS
-        const stars = document.querySelectorAll('#starRating i');
-        let selectedRating = 5;
-
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                selectedRating = parseInt(star.getAttribute('data-rating'));
-                updateStars(selectedRating);
-            });
-        });
-
-        function updateStars(rating) {
-            stars.forEach(star => {
-                const starRating = parseInt(star.getAttribute('data-rating'));
-                if (starRating <= rating) {
-                    star.classList.add('active');
-                } else {
-                    star.classList.remove('active');
-                }
-            });
-        }
-
-        // 4. DYNAMIC REVIEWS MANAGEMENT (LOCAL STORAGE)
-        const reviewForm = document.getElementById('reviewForm');
-        const reviewsList = document.getElementById('reviewsList');
-
-        // Load saved reviews on launch
-        document.addEventListener('DOMContentLoaded', loadReviews);
-
-        reviewForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('reviewerName').value;
-            const site = document.getElementById('reviewerSite').value || 'Colaborator Client';
-            const text = document.getElementById('reviewText').value;
-
-            const newReview = {
-                name,
-                site,
-                rating: selectedRating,
-                text
-            };
-
-            saveReview(newReview);
-            renderReviewCard(newReview, true);
-            reviewForm.reset();
-            updateStars(5);
-            selectedRating = 5;
-            alert('Recenzia ta a fost adăugată cu succes! Îți mulțumim.');
-        });
-
-        function saveReview(review) {
-            let reviews = JSON.parse(localStorage.getItem('maxim_reviews') || '[]');
-            reviews.unshift(review);
-            localStorage.setItem('maxim_reviews', JSON.stringify(reviews));
-        }
-
-        function loadReviews() {
-            let reviews = JSON.parse(localStorage.getItem('maxim_reviews') || '[]');
-            reviews.forEach(review => renderReviewCard(review, false));
-        }
-
-        function renderReviewCard(review, isNew) {
-            const card = document.createElement('div');
-            card.className = 'review-card';
-            
-            let starsHtml = '';
-            for (let i = 1; i <= 5; i++) {
-                starsHtml += `<i class="fa-solid fa-star" style="color: ${i <= review.rating ? 'var(--gold-primary)' : 'rgba(255,255,255,0.1)'};"></i>`;
-            }
-
-            card.innerHTML = `
-                <div class="review-header">
-                    <div>
-                        <div class="reviewer-name">${escapeHtml(review.name)}</div>
-                        <div class="reviewer-site">${escapeHtml(review.site)}</div>
-                    </div>
-                    <div class="review-stars">${starsHtml}</div>
-                </div>
-                <p class="review-text">${escapeHtml(review.text)}</p>
-            `;
-
-            if (isNew) {
-                reviewsList.insertBefore(card, reviewsList.firstChild);
-            } else {
-                reviewsList.appendChild(card);
-            }
-        }
-
-        function escapeHtml(text) {
-            return text.replace(/[&<>"']/g, function(m) {
-                return {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#039;'
-                }[m];
-            });
-        }
+        // Remove test reviews previously stored only in this browser.
+        localStorage.removeItem('maxim_reviews');
     </script>
 </body>
 </html>

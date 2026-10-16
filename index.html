@@ -211,12 +211,46 @@
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
         }
 
+        /* LANGUAGE SWITCHER */
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+            margin-left: auto;
+            margin-right: 1.2rem;
+            padding: 3px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 30px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 0.35rem 0.75rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            color: var(--gold-primary);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--gold-primary), #b38f2a);
+            color: #000;
+        }
+
         /* HERO SECTION */
         .hero {
             padding: 180px 8% 100px;
             text-align: center;
             position: relative;
-            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, rgba(10, 10, 12, 1) 70%);
+            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, rgba(43, 45, 49, 1) 70%);
         }
 
         .hero-badge {
@@ -785,9 +819,22 @@
         @media (max-width: 768px) {
             header { padding: 1rem 5%; }
             nav { display: none; }
-            .hero h1 { font-size: 2.2rem; }
+            .lang-switch { margin-right: 0.6rem; }
+            .lang-btn { padding: 0.3rem 0.55rem; font-size: 0.75rem; }
+            .btn-header { padding: 0.5rem 0.9rem; font-size: 0.75rem; }
+            .brand-sub { display: none; }
+            .brand-icon { width: 38px; height: 38px; }
+            .brand-logo { gap: 8px; }
+            .hero h1 { font-size: 2.2rem; overflow-wrap: break-word; }
             section { padding: 60px 5%; }
             .bonus-card { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .btn-header span { display: none; }
+            .btn-header i { font-size: 1.2rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .price-row { flex-wrap: wrap; }
         }
     </style>
 </head>
@@ -809,17 +856,22 @@
             <div class="brand-icon">MX</div>
             <div>
                 <span class="brand-title">MAXIM</span>
-                <span class="brand-sub">Webdeveloper & Designer</span>
+                <span class="brand-sub" data-i18n="brand_sub">Webdeveloper & Designer</span>
             </div>
         </a>
         <nav>
-            <a href="#portofoliu">Portofoliu</a>
-            <a href="#servicii">Servicii & Marketing</a>
-            <a href="#recenzii">Recenzii</a>
-            <a href="#contact">Contact</a>
+            <a href="#portofoliu" data-i18n="nav_portfolio">Portofoliu</a>
+            <a href="#servicii" data-i18n="nav_services">Servicii & Marketing</a>
+            <a href="#recenzii" data-i18n="nav_reviews">Recenzii</a>
+            <a href="#contact" data-i18n="nav_contact">Contact</a>
         </nav>
-        <a href="https://wa.me/37378404717?text=Salut%20Maxim,%20am%20v%C4%83zut%20oferta%20ta%20pe%20site%20%C8%99i%20a%C8%99%20dori%20o%20consulta%C8%9Bie!" class="btn-header" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp Direct
+        <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" class="lang-btn" data-lang="ro">RO</button>
+            <button type="button" class="lang-btn" data-lang="ru">RU</button>
+            <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a data-wa="wa_header" href="https://wa.me/37378404717?text=Salut%20Maxim,%20am%20v%C4%83zut%20oferta%20ta%20pe%20site%20%C8%99i%20a%C8%99%20dori%20o%20consulta%C8%9Bie!" class="btn-header" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> <span data-i18n="wa_direct">WhatsApp Direct</span>
         </a>
     </header>
 
@@ -827,20 +879,20 @@
     <section class="hero">
         <div class="hero-badge">
             <i class="fa-solid fa-crown" style="color: var(--gold-primary);"></i>
-            Creație Web & Strategii Digital Marketing
+            <span data-i18n="hero_badge">Creație Web & Strategii Digital Marketing</span>
         </div>
-        <h1>
+        <h1 data-i18n="hero_h1">
             Dezvoltare Web de <span class="gold">Înaltă Performanță</span> & <span class="silver">Soluții Premium</span>
         </h1>
-        <p>
+        <p data-i18n="hero_p">
             Creez site-uri de prezentare, magazine online e-commerce și campanii de promovare orientate pe rezultate reale și creșterea vânzărilor afacerii tale.
         </p>
         <div class="hero-cta">
             <a href="#portofoliu" class="btn-primary">
-                <i class="fa-solid fa-fire"></i> Vezi Ofertele Limitate
+                <i class="fa-solid fa-fire"></i> <span data-i18n="hero_offers">Vezi Ofertele Limitate</span>
             </a>
-            <a href="https://wa.me/37378404717?text=Salut!%20Vreau%20s%C4%83%20solicit%20un%20proiect%20web." class="btn-secondary" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i> Discută pe WhatsApp
+            <a data-wa="wa_hero" href="https://wa.me/37378404717?text=Salut!%20Vreau%20s%C4%83%20solicit%20un%20proiect%20web." class="btn-secondary" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="hero_discuss">Discută pe WhatsApp</span>
             </a>
         </div>
     </section>
@@ -848,8 +900,8 @@
     <!-- PORTFOLIO SECTION -->
     <section id="portofoliu">
         <div class="section-header">
-            <span class="section-subtitle">Portofoliu & Oferte Limitate</span>
-            <h2 class="section-title">Proiecte Web Realizate</h2>
+            <span class="section-subtitle" data-i18n="pf_sub">Portofoliu & Oferte Limitate</span>
+            <h2 class="section-title" data-i18n="pf_title">Proiecte Web Realizate</h2>
         </div>
 
         <div class="portfolio-grid">
@@ -865,9 +917,9 @@
                     <a href="http://www.itagroup.md" target="_blank" class="project-domain">www.itagroup.md</a>
                 </div>
                 <div class="project-body">
-                    <span class="project-tag">Site Corporativ / Portofoliu</span>
+                    <span class="project-tag" data-i18n="p1_tag">Site Corporativ / Portofoliu</span>
                     <h3 class="project-title">ITA Group</h3>
-                    <p class="project-desc">
+                    <p class="project-desc" data-i18n="p1_desc">
                         Platformă web de prezentare servicii corporative, structurată pe arhitectură modernă, ultra-rapidă și optimizată pentru conversia vizitatorilor.
                     </p>
 
@@ -875,20 +927,20 @@
                         <div class="price-row">
                             <span class="price-old">400€</span>
                             <span class="price-new">300€</span>
-                            <span class="price-badge">-25% REDUCERE</span>
+                            <span class="price-badge" data-i18n="badge_discount">-25% REDUCERE</span>
                         </div>
                         <div class="maintenance-note">
                             <i class="fa-solid fa-shield-halved"></i>
-                            Mentenanță & Administrare Tehnică: <strong>500 MDL / lună</strong>
+                            <span data-i18n="p1_note">Mentenanță & Administrare Tehnică: <strong>500 MDL / lună</strong></span>
                         </div>
                     </div>
 
                     <div class="project-actions">
                         <a href="http://www.itagroup.md" target="_blank" class="btn-project btn-live">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Vezi Live
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="view_live">Vezi Live</span>
                         </a>
-                        <a href="https://wa.me/37378404717?text=Salut%20Maxim!%20Vreau%20un%20site%20de%20prezentare%20similar%20cu%20www.itagroup.md%20la%20ofert%C4%83%20de%20300€." class="btn-project btn-order" target="_blank">
-                            <i class="fa-brands fa-whatsapp"></i> Comandă
+                        <a data-wa="wa_p1" href="https://wa.me/37378404717?text=Salut%20Maxim!%20Vreau%20un%20site%20de%20prezentare%20similar%20cu%20www.itagroup.md%20la%20ofert%C4%83%20de%20300€." class="btn-project btn-order" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i> <span data-i18n="order">Comandă</span>
                         </a>
                     </div>
                 </div>
@@ -905,9 +957,9 @@
                     <a href="http://www.Bumbonel.md" target="_blank" class="project-domain">www.Bumbonel.md</a>
                 </div>
                 <div class="project-body">
-                    <span class="project-tag">Magazin Online E-Commerce</span>
+                    <span class="project-tag" data-i18n="p2_tag">Magazin Online E-Commerce</span>
                     <h3 class="project-title">Bumbonel.md</h3>
-                    <p class="project-desc">
+                    <p class="project-desc" data-i18n="p2_desc">
                         Platformă completă de comerț electronic cu coș de cumpărături, gestiune produse, plată online, filtre avansate și integrare livrare.
                     </p>
 
@@ -915,20 +967,20 @@
                         <div class="price-row">
                             <span class="price-old">2000€</span>
                             <span class="price-new">1299€</span>
-                            <span class="price-badge">OFERTĂ PREMIUM</span>
+                            <span class="price-badge" data-i18n="badge_premium">OFERTĂ PREMIUM</span>
                         </div>
                         <div class="maintenance-note">
                             <i class="fa-solid fa-bolt"></i>
-                            Inclus: Configurare Produse & Sistem Plăți
+                            <span data-i18n="p2_note">Inclus: Configurare Produse & Sistem Plăți</span>
                         </div>
                     </div>
 
                     <div class="project-actions">
                         <a href="http://www.Bumbonel.md" target="_blank" class="btn-project btn-live">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Vezi Live
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="view_live">Vezi Live</span>
                         </a>
-                        <a href="https://wa.me/37378404717?text=Salut%20Maxim!%20Doresc%20un%20Magazin%20Online%20E-Commerce%20stil%20Bumbonel.md%20la%20pretul%20reducere%201299€." class="btn-project btn-order" target="_blank">
-                            <i class="fa-brands fa-whatsapp"></i> Comandă
+                        <a data-wa="wa_p2" href="https://wa.me/37378404717?text=Salut%20Maxim!%20Doresc%20un%20Magazin%20Online%20E-Commerce%20stil%20Bumbonel.md%20la%20pretul%20reducere%201299€." class="btn-project btn-order" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i> <span data-i18n="order">Comandă</span>
                         </a>
                     </div>
                 </div>
@@ -945,9 +997,9 @@
                     <a href="http://www.bereraci.md" target="_blank" class="project-domain">www.bereraci.md</a>
                 </div>
                 <div class="project-body">
-                    <span class="project-tag">Catalog Gastronomic & Produse</span>
+                    <span class="project-tag" data-i18n="p3_tag">Catalog Gastronomic & Produse</span>
                     <h3 class="project-title">Bereraci</h3>
-                    <p class="project-desc">
+                    <p class="project-desc" data-i18n="p3_desc">
                         Pagină web modernă destinată berăriilor craft și produselor gastronomice, cu meniu interactiv, imagini HD și apel rapid la comandă.
                     </p>
 
@@ -955,20 +1007,20 @@
                         <div class="price-row">
                             <span class="price-old">400€</span>
                             <span class="price-new">300€</span>
-                            <span class="price-badge">-25% REDUCERE</span>
+                            <span class="price-badge" data-i18n="badge_discount">-25% REDUCERE</span>
                         </div>
                         <div class="maintenance-note">
                             <i class="fa-solid fa-mobile-screen-button"></i>
-                            Optimizat 100% pentru mobil & Meniu Digital
+                            <span data-i18n="p3_note">Optimizat 100% pentru mobil & Meniu Digital</span>
                         </div>
                     </div>
 
                     <div class="project-actions">
                         <a href="http://www.bereraci.md" target="_blank" class="btn-project btn-live">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Vezi Live
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="view_live">Vezi Live</span>
                         </a>
-                        <a href="https://wa.me/37378404717?text=Salut%20Maxim!%20Doresc%20o%20pagin%C4%83%20web%20catalog%20stil%20www.bereraci.md%20la%20pretul%20de%20300€." class="btn-project btn-order" target="_blank">
-                            <i class="fa-brands fa-whatsapp"></i> Comandă
+                        <a data-wa="wa_p3" href="https://wa.me/37378404717?text=Salut%20Maxim!%20Doresc%20o%20pagin%C4%83%20web%20catalog%20stil%20www.bereraci.md%20la%20pretul%20de%20300€." class="btn-project btn-order" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i> <span data-i18n="order">Comandă</span>
                         </a>
                     </div>
                 </div>
@@ -985,9 +1037,9 @@
                     <a href="https://lumanariparfumatemd02.md/" target="_blank" class="project-domain">lumanariparfumatemd02.md</a>
                 </div>
                 <div class="project-body">
-                    <span class="project-tag">Catalog Produse & Comenzi</span>
-                    <h3 class="project-title">Lumânări Parfumate</h3>
-                    <p class="project-desc">
+                    <span class="project-tag" data-i18n="p4_tag">Catalog Produse & Comenzi</span>
+                    <h3 class="project-title" data-i18n="p4_title">Lumânări Parfumate</h3>
+                    <p class="project-desc" data-i18n="p4_desc">
                         Pagină web elegantă pentru lumânări parfumate, realizată pentru Stela Mirela, cu catalog de produse, imagini atractive și comandă rapidă.
                     </p>
 
@@ -995,20 +1047,20 @@
                         <div class="price-row">
                             <span class="price-old">400€</span>
                             <span class="price-new">300€</span>
-                            <span class="price-badge">-25% REDUCERE</span>
+                            <span class="price-badge" data-i18n="badge_discount">-25% REDUCERE</span>
                         </div>
                         <div class="maintenance-note">
                             <i class="fa-solid fa-mobile-screen-button"></i>
-                            Optimizat 100% pentru mobil & Catalog Digital
+                            <span data-i18n="p4_note">Optimizat 100% pentru mobil & Catalog Digital</span>
                         </div>
                     </div>
 
                     <div class="project-actions">
                         <a href="https://lumanariparfumatemd02.md/" target="_blank" class="btn-project btn-live">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Vezi Live
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="view_live">Vezi Live</span>
                         </a>
-                        <a href="https://wa.me/37378404717?text=Salut%20Maxim!%20Doresc%20o%20pagin%C4%83%20web%20catalog%20stil%20lumanariparfumatemd02.md%20la%20pretul%20de%20300€." class="btn-project btn-order" target="_blank">
-                            <i class="fa-brands fa-whatsapp"></i> Comandă
+                        <a data-wa="wa_p4" href="https://wa.me/37378404717?text=Salut%20Maxim!%20Doresc%20o%20pagin%C4%83%20web%20catalog%20stil%20lumanariparfumatemd02.md%20la%20pretul%20de%20300€." class="btn-project btn-order" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i> <span data-i18n="order">Comandă</span>
                         </a>
                     </div>
                 </div>
@@ -1025,9 +1077,9 @@
                     <a href="http://viomax.md/" target="_blank" class="project-domain">viomax.md</a>
                 </div>
                 <div class="project-body">
-                    <span class="project-tag">Lecții de Vioară & Evenimente</span>
+                    <span class="project-tag" data-i18n="p5_tag">Lecții de Vioară & Evenimente</span>
                     <h3 class="project-title">Viomax</h3>
-                    <p class="project-desc">
+                    <p class="project-desc" data-i18n="p5_desc">
                         Pagină web modernă și estetică, specializată pentru lecții de vioară & evenimente speciale.
                     </p>
 
@@ -1035,20 +1087,20 @@
                         <div class="price-row">
                             <span class="price-old">400€</span>
                             <span class="price-new">300€</span>
-                            <span class="price-badge">-25% REDUCERE</span>
+                            <span class="price-badge" data-i18n="badge_discount">-25% REDUCERE</span>
                         </div>
                         <div class="maintenance-note">
                             <i class="fa-solid fa-mobile-screen-button"></i>
-                            Optimizat 100% pentru mobil & Design Modern
+                            <span data-i18n="p5_note">Optimizat 100% pentru mobil & Design Modern</span>
                         </div>
                     </div>
 
                     <div class="project-actions">
                         <a href="http://viomax.md/" target="_blank" class="btn-project btn-live">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Vezi Live
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="view_live">Vezi Live</span>
                         </a>
-                        <a href="https://wa.me/37378404717?text=Salut%20Maxim!%20Doresc%20o%20pagin%C4%83%20web%20stil%20viomax.md%20la%20pretul%20de%20300€." class="btn-project btn-order" target="_blank">
-                            <i class="fa-brands fa-whatsapp"></i> Comandă
+                        <a data-wa="wa_p5" href="https://wa.me/37378404717?text=Salut%20Maxim!%20Doresc%20o%20pagin%C4%83%20web%20stil%20viomax.md%20la%20pretul%20de%20300€." class="btn-project btn-order" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i> <span data-i18n="order">Comandă</span>
                         </a>
                     </div>
                 </div>
@@ -1060,8 +1112,8 @@
     <!-- SERVICES & MARKETING SECTION -->
     <section id="servicii" style="background: rgba(54, 57, 64, 0.5);">
         <div class="section-header">
-            <span class="section-subtitle">Promovare Digitală & Creștere</span>
-            <h2 class="section-title">Servicii Marketing & SEO</h2>
+            <span class="section-subtitle" data-i18n="sv_sub">Promovare Digitală & Creștere</span>
+            <h2 class="section-title" data-i18n="sv_title">Servicii Marketing & SEO</h2>
         </div>
 
         <div class="services-grid">
@@ -1069,29 +1121,29 @@
             <div class="service-card">
                 <div class="service-icon"><i class="fa-brands fa-google"></i></div>
                 <h3 class="service-title">Google Ads</h3>
-                <p class="service-desc">Campanii de Search & Display optimizate pentru a plasa afacerea ta pe prima poziție în căutările clienților calificați.</p>
-                <div class="service-price">Tarif minim: <span>de la 50€</span></div>
+                <p class="service-desc" data-i18n="sv_google_desc">Campanii de Search & Display optimizate pentru a plasa afacerea ta pe prima poziție în căutările clienților calificați.</p>
+                <div class="service-price" data-i18n="sv_tariff_50">Tarif minim: <span>de la 50€</span></div>
             </div>
 
             <div class="service-card">
                 <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h3 class="service-title">SEO & Optimizare Viteză</h3>
-                <p class="service-desc">Optimizare cod, viteza de încărcare și structură pentru poziționare organică superioară în Google.</p>
-                <div class="service-price">Tarif minim: <span>de la 80€</span></div>
+                <h3 class="service-title" data-i18n="sv_seo_title">SEO & Optimizare Viteză</h3>
+                <p class="service-desc" data-i18n="sv_seo_desc">Optimizare cod, viteza de încărcare și structură pentru poziționare organică superioară în Google.</p>
+                <div class="service-price" data-i18n="sv_tariff_80">Tarif minim: <span>de la 80€</span></div>
             </div>
 
             <!-- BONUS CARD -->
             <div class="bonus-card">
                 <div class="bonus-content">
-                    <span class="bonus-badge"><i class="fa-solid fa-gift"></i> BONUS GRATUIT INCLUS</span>
-                    <h3 class="bonus-title">Optimizare & Configurare Google Maps</h3>
-                    <p class="bonus-desc">
+                    <span class="bonus-badge"><i class="fa-solid fa-gift"></i> <span data-i18n="bonus_badge">BONUS GRATUIT INCLUS</span></span>
+                    <h3 class="bonus-title" data-i18n="bonus_title">Optimizare & Configurare Google Maps</h3>
+                    <p class="bonus-desc" data-i18n="bonus_desc">
                         La orice proiect web comandat care nu deține profil Google My Business / Google Maps, ofer gratuit crearea și optimizarea locației pe hartă pentru a fi găsit facil de clienții din zonă!
                     </p>
                 </div>
                 <div>
-                    <a href="https://wa.me/37378404717?text=Salut%20Maxim,%20vreau%20s%C4%83%20beneficiez%20de%20oferta%20web%20%2B%20Bonusul%20Google%20Maps!" class="btn-primary" target="_blank">
-                        <i class="fa-solid fa-circle-check"></i> Solicită Oferta + Bonus
+                    <a data-wa="wa_bonus" href="https://wa.me/37378404717?text=Salut%20Maxim,%20vreau%20s%C4%83%20beneficiez%20de%20oferta%20web%20%2B%20Bonusul%20Google%20Maps!" class="btn-primary" target="_blank">
+                        <i class="fa-solid fa-circle-check"></i> <span data-i18n="bonus_btn">Solicită Oferta + Bonus</span>
                     </a>
                 </div>
             </div>
@@ -1102,9 +1154,9 @@
     <!-- REVIEWS SECTION -->
     <section id="recenzii">
         <div class="section-header">
-            <span class="section-subtitle">Încredere & Colaborări</span>
-            <h2 class="section-title">Testimoniale Publicate Manual</h2>
-            <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0; line-height: 1.7;">Recenziile sunt publicate numai după confirmarea colaborării de către titularul paginii web. Nu acceptăm recenzii anonime sau publicare automată.</p>
+            <span class="section-subtitle" data-i18n="rv_sub">Încredere & Colaborări</span>
+            <h2 class="section-title" data-i18n="rv_title">Testimoniale Publicate Manual</h2>
+            <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0; line-height: 1.7;" data-i18n="rv_note">Recenziile sunt publicate numai după confirmarea colaborării de către titularul paginii web. Nu acceptăm recenzii anonime sau publicare automată.</p>
         </div>
 
         <div class="reviews-container" style="grid-template-columns: 1fr; max-width: 900px; margin: 0 auto;">
@@ -1121,7 +1173,7 @@
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                     </div>
-                    <p class="review-text">Proiectul a fost realizat într-un timp neașteptat de scurt. Am rămas plăcut surprins că s-a elaborat tot ce mi-am dorit pentru pagină, de la design până la portofoliu. Mulțumesc!</p>
+                    <p class="review-text" data-i18n="rv1">Proiectul a fost realizat într-un timp neașteptat de scurt. Am rămas plăcut surprins că s-a elaborat tot ce mi-am dorit pentru pagină, de la design până la portofoliu. Mulțumesc!</p>
                 </div>
 
                 <!-- PRESET REVIEW 2 -->
@@ -1135,7 +1187,7 @@
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                     </div>
-                    <p class="review-text">Ne place foarte mult cum a ieșit pagina. Nu ne așteptam la un rezultat atât de bun; echipa era la început, dar le-am oferit o șansă și ne bucurăm că am făcut-o.</p>
+                    <p class="review-text" data-i18n="rv2">Ne place foarte mult cum a ieșit pagina. Nu ne așteptam la un rezultat atât de bun; echipa era la început, dar le-am oferit o șansă și ne bucurăm că am făcut-o.</p>
                 </div>
 
                 <!-- PRESET REVIEW 3 -->
@@ -1149,7 +1201,7 @@
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                     </div>
-                    <p class="review-text">Băieții au efectuat o lucrare excelentă. Sunt foarte mulțumit; pentru mine este extraordinar la acest preț. Mult succes!</p>
+                    <p class="review-text" data-i18n="rv3">Băieții au efectuat o lucrare excelentă. Sunt foarte mulțumit; pentru mine este extraordinar la acest preț. Mult succes!</p>
                 </div>
 
                 <!-- PRESET REVIEW 4 -->
@@ -1163,7 +1215,7 @@
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                     </div>
-                    <p class="review-text">Vreau să îți spun un mare mulțumesc pentru saitul creat, este mult peste așteptările mele, nu m-am gândit că în două zile îl vei face așa cum îmi doream, cu acest sait vei ușura munca mea și a clienților mei, mulțumesc pentru răbdarea care ai avut-o în acest proces, vreau să îți spun că ești foarte foarte bravo 🤗</p>
+                    <p class="review-text" data-i18n="rv4">Vreau să îți spun un mare mulțumesc pentru saitul creat, este mult peste așteptările mele, nu m-am gândit că în două zile îl vei face așa cum îmi doream, cu acest sait vei ușura munca mea și a clienților mei, mulțumesc pentru răbdarea care ai avut-o în acest proces, vreau să îți spun că ești foarte foarte bravo 🤗</p>
                 </div>
 
                 <!-- PRESET REVIEW 5 -->
@@ -1177,7 +1229,7 @@
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                     </div>
-                    <p class="review-text">A fost superb! Pregătire excelentă, totul la timp, calitativ, frumos, estetic. 11/10. Mulțumesc mult pentru tot 🔥</p>
+                    <p class="review-text" data-i18n="rv5">A fost superb! Pregătire excelentă, totul la timp, calitativ, frumos, estetic. 11/10. Mulțumesc mult pentru tot 🔥</p>
                 </div>
 
             </div>
@@ -1188,18 +1240,18 @@
     <!-- FOOTER -->
     <footer id="contact">
         <div class="footer-logo">MAXIM</div>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Web Developer & Web Designer Profesionist</p>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;" data-i18n="ft_role">Web Developer & Web Designer Profesionist</p>
         
         <div class="footer-contacts">
             <a href="tel:+37360126912" class="footer-link">
                 <i class="fa-solid fa-phone" style="color: var(--gold-primary);"></i> +373 60 126 912
             </a>
             <a href="https://wa.me/37378404717" class="footer-link" target="_blank">
-                <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> WhatsApp Direct
+                <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> <span data-i18n="wa_direct">WhatsApp Direct</span>
             </a>
         </div>
 
-        <div class="copy-text">
+        <div class="copy-text" data-i18n="ft_copy">
             &copy; 2026 MAXIM Webdevelopment. Toate drepturile rezervate. Găzduit gratuit pe GitHub Pages.
         </div>
     </footer>
@@ -1220,6 +1272,352 @@
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
+
+        // 3. LANGUAGE SWITCHER (RO / RU / EN)
+        const I18N = {
+        "brand_sub": [
+                "Webdeveloper & Designer",
+                "Веб-разработчик и дизайнер",
+                "Webdeveloper & Designer"
+        ],
+        "nav_portfolio": [
+                "Portofoliu",
+                "Портфолио",
+                "Portfolio"
+        ],
+        "nav_services": [
+                "Servicii & Marketing",
+                "Услуги и маркетинг",
+                "Services & Marketing"
+        ],
+        "nav_reviews": [
+                "Recenzii",
+                "Отзывы",
+                "Reviews"
+        ],
+        "nav_contact": [
+                "Contact",
+                "Контакты",
+                "Contact"
+        ],
+        "wa_direct": [
+                "WhatsApp Direct",
+                "WhatsApp напрямую",
+                "WhatsApp Direct"
+        ],
+        "hero_badge": [
+                "Creație Web & Strategii Digital Marketing",
+                "Веб-разработка и стратегии цифрового маркетинга",
+                "Web Creation & Digital Marketing Strategies"
+        ],
+        "hero_h1": [
+                "Dezvoltare Web de <span class=\"gold\">Înaltă Performanță</span> & <span class=\"silver\">Soluții Premium</span>",
+                "Веб-разработка <span class=\"gold\">высокой производительности</span> и <span class=\"silver\">премиум-решения</span>",
+                "<span class=\"gold\">High-Performance</span> Web Development & <span class=\"silver\">Premium Solutions</span>"
+        ],
+        "hero_p": [
+                "Creez site-uri de prezentare, magazine online e-commerce și campanii de promovare orientate pe rezultate reale și creșterea vânzărilor afacerii tale.",
+                "Создаю презентационные сайты, интернет-магазины e-commerce и рекламные кампании, ориентированные на реальные результаты и рост продаж вашего бизнеса.",
+                "I create presentation websites, e-commerce online stores and promotion campaigns focused on real results and increasing your business sales."
+        ],
+        "hero_offers": [
+                "Vezi Ofertele Limitate",
+                "Смотреть ограниченные предложения",
+                "See Limited Offers"
+        ],
+        "hero_discuss": [
+                "Discută pe WhatsApp",
+                "Обсудить в WhatsApp",
+                "Discuss on WhatsApp"
+        ],
+        "pf_sub": [
+                "Portofoliu & Oferte Limitate",
+                "Портфолио и ограниченные предложения",
+                "Portfolio & Limited Offers"
+        ],
+        "pf_title": [
+                "Proiecte Web Realizate",
+                "Реализованные веб-проекты",
+                "Completed Web Projects"
+        ],
+        "badge_discount": [
+                "-25% REDUCERE",
+                "СКИДКА -25%",
+                "-25% DISCOUNT"
+        ],
+        "badge_premium": [
+                "OFERTĂ PREMIUM",
+                "ПРЕМИУМ-ПРЕДЛОЖЕНИЕ",
+                "PREMIUM OFFER"
+        ],
+        "view_live": [
+                "Vezi Live",
+                "Смотреть онлайн",
+                "View Live"
+        ],
+        "order": [
+                "Comandă",
+                "Заказать",
+                "Order"
+        ],
+        "p1_tag": [
+                "Site Corporativ / Portofoliu",
+                "Корпоративный сайт / Портфолио",
+                "Corporate Site / Portfolio"
+        ],
+        "p1_desc": [
+                "Platformă web de prezentare servicii corporative, structurată pe arhitectură modernă, ultra-rapidă și optimizată pentru conversia vizitatorilor.",
+                "Веб-платформа для презентации корпоративных услуг, построенная на современной сверхбыстрой архитектуре и оптимизированная для конверсии посетителей.",
+                "Web platform for presenting corporate services, built on a modern, ultra-fast architecture and optimized for visitor conversion."
+        ],
+        "p1_note": [
+                "Mentenanță & Administrare Tehnică: <strong>500 MDL / lună</strong>",
+                "Обслуживание и техническое администрирование: <strong>500 MDL / месяц</strong>",
+                "Maintenance & Technical Administration: <strong>500 MDL / month</strong>"
+        ],
+        "p2_tag": [
+                "Magazin Online E-Commerce",
+                "Интернет-магазин E-Commerce",
+                "E-Commerce Online Store"
+        ],
+        "p2_desc": [
+                "Platformă completă de comerț electronic cu coș de cumpărături, gestiune produse, plată online, filtre avansate și integrare livrare.",
+                "Полноценная платформа электронной коммерции с корзиной покупок, управлением товарами, онлайн-оплатой, расширенными фильтрами и интеграцией доставки.",
+                "Complete e-commerce platform with shopping cart, product management, online payment, advanced filters and delivery integration."
+        ],
+        "p2_note": [
+                "Inclus: Configurare Produse & Sistem Plăți",
+                "Включено: настройка товаров и платёжной системы",
+                "Included: Product Setup & Payment System"
+        ],
+        "p3_tag": [
+                "Catalog Gastronomic & Produse",
+                "Гастрономический каталог и продукты",
+                "Gastronomic Catalog & Products"
+        ],
+        "p3_desc": [
+                "Pagină web modernă destinată berăriilor craft și produselor gastronomice, cu meniu interactiv, imagini HD și apel rapid la comandă.",
+                "Современная веб-страница для крафтовых пивоварен и гастрономических продуктов, с интерактивным меню, HD-изображениями и быстрым звонком для заказа.",
+                "Modern web page intended for craft breweries and gastronomic products, with interactive menu, HD images and quick call to order."
+        ],
+        "p3_note": [
+                "Optimizat 100% pentru mobil & Meniu Digital",
+                "Оптимизировано на 100% для мобильных устройств и цифровое меню",
+                "100% Optimized for mobile & Digital Menu"
+        ],
+        "p4_tag": [
+                "Catalog Produse & Comenzi",
+                "Каталог товаров и заказы",
+                "Products Catalog & Orders"
+        ],
+        "p4_title": [
+                "Lumânări Parfumate",
+                "Ароматические свечи",
+                "Scented Candles"
+        ],
+        "p4_desc": [
+                "Pagină web elegantă pentru lumânări parfumate, realizată pentru Stela Mirela, cu catalog de produse, imagini atractive și comandă rapidă.",
+                "Элегантная веб-страница для ароматических свечей, созданная для Стелы Мирелы, с каталогом товаров, привлекательными изображениями и быстрым заказом.",
+                "Elegant web page for scented candles, made for Stela Mirela, with product catalog, attractive images and quick order."
+        ],
+        "p4_note": [
+                "Optimizat 100% pentru mobil & Catalog Digital",
+                "Оптимизировано на 100% для мобильных устройств и цифровой каталог",
+                "100% Optimized for mobile & Digital Catalog"
+        ],
+        "p5_tag": [
+                "Lecții de Vioară & Evenimente",
+                "Уроки скрипки и мероприятия",
+                "Violin Lessons & Events"
+        ],
+        "p5_desc": [
+                "Pagină web modernă și estetică, specializată pentru lecții de vioară & evenimente speciale.",
+                "Современная и эстетичная веб-страница, специализированная для уроков скрипки и особых мероприятий.",
+                "Modern and aesthetic web page, specialized for violin lessons & special events."
+        ],
+        "p5_note": [
+                "Optimizat 100% pentru mobil & Design Modern",
+                "Оптимизировано на 100% для мобильных устройств и современный дизайн",
+                "100% Optimized for mobile & Modern Design"
+        ],
+        "sv_sub": [
+                "Promovare Digitală & Creștere",
+                "Цифровое продвижение и рост",
+                "Digital Promotion & Growth"
+        ],
+        "sv_title": [
+                "Servicii Marketing & SEO",
+                "Услуги маркетинга и SEO",
+                "Marketing & SEO Services"
+        ],
+        "sv_google_desc": [
+                "Campanii de Search & Display optimizate pentru a plasa afacerea ta pe prima poziție în căutările clienților calificați.",
+                "Кампании Search & Display, оптимизированные для вывода вашего бизнеса на первую позицию в поиске квалифицированных клиентов.",
+                "Search & Display campaigns optimized to place your business in the first position in qualified customers' searches."
+        ],
+        "sv_tariff_50": [
+                "Tarif minim: <span>de la 50€</span>",
+                "Минимальный тариф: <span>от 50€</span>",
+                "Minimum rate: <span>from 50€</span>"
+        ],
+        "sv_seo_title": [
+                "SEO & Optimizare Viteză",
+                "SEO и оптимизация скорости",
+                "SEO & Speed Optimization"
+        ],
+        "sv_seo_desc": [
+                "Optimizare cod, viteza de încărcare și structură pentru poziționare organică superioară în Google.",
+                "Оптимизация кода, скорости загрузки и структуры для более высокого органического позиционирования в Google.",
+                "Code optimization, loading speed and structure for superior organic positioning in Google."
+        ],
+        "sv_tariff_80": [
+                "Tarif minim: <span>de la 80€</span>",
+                "Минимальный тариф: <span>от 80€</span>",
+                "Minimum rate: <span>from 80€</span>"
+        ],
+        "bonus_badge": [
+                "BONUS GRATUIT INCLUS",
+                "БЕСПЛАТНЫЙ БОНУС ВКЛЮЧЁН",
+                "FREE BONUS INCLUDED"
+        ],
+        "bonus_title": [
+                "Optimizare & Configurare Google Maps",
+                "Оптимизация и настройка Google Maps",
+                "Google Maps Optimization & Setup"
+        ],
+        "bonus_desc": [
+                "La orice proiect web comandat care nu deține profil Google My Business / Google Maps, ofer gratuit crearea și optimizarea locației pe hartă pentru a fi găsit facil de clienții din zonă!",
+                "Для любого заказанного веб-проекта, у которого нет профиля Google My Business / Google Maps, я бесплатно создаю и оптимизирую местоположение на карте, чтобы клиенты из вашего района могли легко вас найти!",
+                "For any ordered web project that does not have a Google My Business / Google Maps profile, I offer free creation and optimization of the location on the map so that it can be easily found by customers in the area!"
+        ],
+        "bonus_btn": [
+                "Solicită Oferta + Bonus",
+                "Запросить предложение + бонус",
+                "Request the Offer + Bonus"
+        ],
+        "rv_sub": [
+                "Încredere & Colaborări",
+                "Доверие и сотрудничество",
+                "Trust & Collaborations"
+        ],
+        "rv_title": [
+                "Testimoniale Publicate Manual",
+                "Отзывы, опубликованные вручную",
+                "Manually Published Testimonials"
+        ],
+        "rv_note": [
+                "Recenziile sunt publicate numai după confirmarea colaborării de către titularul paginii web. Nu acceptăm recenzii anonime sau publicare automată.",
+                "Отзывы публикуются только после подтверждения сотрудничества владельцем веб-страницы. Мы не принимаем анонимные отзывы и не публикуем их автоматически.",
+                "Reviews are published only after the collaboration is confirmed by the owner of the web page. We do not accept anonymous reviews or automatic publishing."
+        ],
+        "rv1": [
+                "Proiectul a fost realizat într-un timp neașteptat de scurt. Am rămas plăcut surprins că s-a elaborat tot ce mi-am dorit pentru pagină, de la design până la portofoliu. Mulțumesc!",
+                "Проект был выполнен в неожиданно короткие сроки. Я был приятно удивлён, что было сделано всё, что я хотел для страницы — от дизайна до портфолио. Спасибо!",
+                "The project was completed in an unexpectedly short time. I was pleasantly surprised that everything I wanted for the page was developed, from design to portfolio. Thank you!"
+        ],
+        "rv2": [
+                "Ne place foarte mult cum a ieșit pagina. Nu ne așteptam la un rezultat atât de bun; echipa era la început, dar le-am oferit o șansă și ne bucurăm că am făcut-o.",
+                "Нам очень нравится, как получилась страница. Мы не ожидали такого хорошего результата; команда была в начале пути, но мы дали им шанс и рады, что сделали это.",
+                "We really like how the page turned out. We did not expect such a good result; the team was at the beginning, but we gave them a chance and we are glad we did."
+        ],
+        "rv3": [
+                "Băieții au efectuat o lucrare excelentă. Sunt foarte mulțumit; pentru mine este extraordinar la acest preț. Mult succes!",
+                "Ребята выполнили отличную работу. Я очень доволен; для меня это замечательно за такую цену. Успехов!",
+                "The guys did an excellent job. I am very satisfied; for me it is extraordinary at this price. Good luck!"
+        ],
+        "rv4": [
+                "Vreau să îți spun un mare mulțumesc pentru saitul creat, este mult peste așteptările mele, nu m-am gândit că în două zile îl vei face așa cum îmi doream, cu acest sait vei ușura munca mea și a clienților mei, mulțumesc pentru răbdarea care ai avut-o în acest proces, vreau să îți spun că ești foarte foarte bravo 🤗",
+                "Хочу сказать тебе большое спасибо за созданный сайт, он намного превзошёл мои ожидания, мне и в голову не приходило, что за два дня ты сделаешь его таким, как мне хотелось, с этим сайтом ты облегчишь работу мне и моим клиентам, спасибо за терпение, которое ты проявил в этом процессе, хочу сказать тебе, что ты очень-очень молодец 🤗",
+                "I want to say a big thank you for the website created, it is far beyond my expectations, I did not think that in two days you would make it the way I wanted, with this website you will ease my work and that of my clients, thank you for the patience you had in this process, I want to tell you that you have done very, very well 🤗"
+        ],
+        "rv5": [
+                "A fost superb! Pregătire excelentă, totul la timp, calitativ, frumos, estetic. 11/10. Mulțumesc mult pentru tot 🔥",
+                "Это было великолепно! Отличная подготовка, всё вовремя, качественно, красиво, эстетично. 11/10. Большое спасибо за всё 🔥",
+                "It was superb! Excellent preparation, everything on time, high quality, beautiful, aesthetic. 11/10. Thank you very much for everything 🔥"
+        ],
+        "ft_role": [
+                "Web Developer & Web Designer Profesionist",
+                "Профессиональный веб-разработчик и веб-дизайнер",
+                "Professional Web Developer & Web Designer"
+        ],
+        "ft_copy": [
+                "&copy; 2026 MAXIM Webdevelopment. Toate drepturile rezervate. Găzduit gratuit pe GitHub Pages.",
+                "&copy; 2026 MAXIM Webdevelopment. Все права защищены. Бесплатно размещено на GitHub Pages.",
+                "&copy; 2026 MAXIM Webdevelopment. All rights reserved. Hosted for free on GitHub Pages."
+        ]
+};
+        const WA_MSG = {
+        "wa_header": [
+                "Salut Maxim, am văzut oferta ta pe site și aș dori o consultație!",
+                "Здравствуйте, Максим! Предложение на вашем сайте мне интересно, хотелось бы получить консультацию!",
+                "Hello Maxim, I saw your offer on the site and would like a consultation!"
+        ],
+        "wa_hero": [
+                "Salut! Vreau să solicit un proiect web.",
+                "Здравствуйте! Хочу заказать веб-проект.",
+                "Hello! I want to request a web project."
+        ],
+        "wa_p1": [
+                "Salut Maxim! Vreau un site de prezentare similar cu www.itagroup.md la ofertă de 300€.",
+                "Здравствуйте, Максим! Хочу презентационный сайт, похожий на www.itagroup.md, по предложению за 300€.",
+                "Hello Maxim! I want a presentation website similar to www.itagroup.md at the offer of 300€."
+        ],
+        "wa_p2": [
+                "Salut Maxim! Doresc un Magazin Online E-Commerce stil Bumbonel.md la pretul reducere 1299€.",
+                "Здравствуйте, Максим! Хочу интернет-магазин E-Commerce в стиле Bumbonel.md по сниженной цене 1299€.",
+                "Hello Maxim! I want an E-Commerce Online Store in the style of Bumbonel.md at the discounted price of 1299€."
+        ],
+        "wa_p3": [
+                "Salut Maxim! Doresc o pagină web catalog stil www.bereraci.md la pretul de 300€.",
+                "Здравствуйте, Максим! Хочу веб-страницу-каталог в стиле www.bereraci.md по цене 300€.",
+                "Hello Maxim! I want a catalog web page in the style of www.bereraci.md at the price of 300€."
+        ],
+        "wa_p4": [
+                "Salut Maxim! Doresc o pagină web catalog stil lumanariparfumatemd02.md la pretul de 300€.",
+                "Здравствуйте, Максим! Хочу веб-страницу-каталог в стиле lumanariparfumatemd02.md по цене 300€.",
+                "Hello Maxim! I want a catalog web page in the style of lumanariparfumatemd02.md at the price of 300€."
+        ],
+        "wa_p5": [
+                "Salut Maxim! Doresc o pagină web stil viomax.md la pretul de 300€.",
+                "Здравствуйте, Максим! Хочу веб-страницу в стиле viomax.md по цене 300€.",
+                "Hello Maxim! I want a web page in the style of viomax.md at the price of 300€."
+        ],
+        "wa_bonus": [
+                "Salut Maxim, vreau să beneficiez de oferta web + Bonusul Google Maps!",
+                "Здравствуйте, Максим! Хочу воспользоваться веб-предложением + бонусом Google Maps!",
+                "Hello Maxim, I want to benefit from the web offer + the Google Maps Bonus!"
+        ]
+};
+        const WA_BASE = 'https://wa.me/37378404717?text=';
+        const PAGE_TITLE = ["MAXIM | Web Developer & Web Designer - Servicii Web & Marketing", "MAXIM | Веб-разработчик и веб-дизайнер — веб-услуги и маркетинг", "MAXIM | Web Developer & Web Designer - Web Services & Marketing"];
+        const LANGS = ['ro', 'ru', 'en'];
+
+        function setLanguage(lang) {
+            if (!LANGS.includes(lang)) lang = 'ro';
+            const idx = LANGS.indexOf(lang);
+            document.documentElement.lang = lang;
+            document.title = PAGE_TITLE[idx];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const v = I18N[el.dataset.i18n];
+                if (v) el.innerHTML = v[idx];
+            });
+            document.querySelectorAll('[data-wa]').forEach(el => {
+                const v = WA_MSG[el.dataset.wa];
+                if (v) el.href = WA_BASE + encodeURIComponent(v[idx]);
+            });
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.lang === lang);
+            });
+            try { localStorage.setItem('maxim_lang', lang); } catch (e) {}
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.addEventListener('click', () => setLanguage(b.dataset.lang));
+        });
+
+        let savedLang = 'ro';
+        try { savedLang = localStorage.getItem('maxim_lang') || 'ro'; } catch (e) {}
+        setLanguage(savedLang);
 
         // Remove test reviews previously stored only in this browser.
         localStorage.removeItem('maxim_reviews');
